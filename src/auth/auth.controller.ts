@@ -1,8 +1,8 @@
 import { Body, Controller, HttpCode, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { RegisterAuthDto } from "./dto/register.dto";
 import { LoginAuthDto } from './dto/login.dto';
-import { TokenDto } from "./dto/token.dto";
+import { RegisterAuthDto } from './dto/register.dto';
+import { TokenDto } from './dto/token.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -17,15 +17,15 @@ export class AuthController {
 
     @UsePipes(new ValidationPipe())
     @HttpCode(200)
-    @Post("login")
+    @Post('login')
     async login(@Body() dto: LoginAuthDto) {
         return this.authService.login(dto);
     }
 
     @UsePipes(new ValidationPipe())
     @HttpCode(200)
-    @Post("access")
-    async getNewToken(@Body() dto: TokenDto) {
-        return this.authService.getNewTokens(dto)
+    @Post('access')
+    async getNewTokens(@Body() dto: TokenDto) {
+        return this.authService.getNewTokens(dto);
     }
 }
