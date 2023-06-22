@@ -5,9 +5,10 @@ export class LoginAuthDto {
     @IsEmail()
     @IsNotEmpty()
     email: string;
-
-    @IsString()
-    @MinLength(6)
-    @IsNotEmpty()
+    
     password: string;
+
+    fullName: string;
+
+    avatar: string;
 }

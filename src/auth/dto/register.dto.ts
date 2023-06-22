@@ -6,8 +6,5 @@ export class RegisterAuthDto {
     @IsNotEmpty()
     email: string;
 
-    @IsString()
-    @MinLength(6)
-    @IsNotEmpty()
     password: string;
 }

@@ -20,7 +20,7 @@ export class UserService {
     async editPassword(dto: InterfaceEmailAndPassword) {
         const { email, password } = dto
         const existUser = await this.userModel.findOne({ email })
-        if (!existUser) throw new UnauthorizedException("User not found")
+        if (!existUser) throw new UnauthorizedException('user_not_found');
         const salt = await genSalt(10)
         const hashPassword = await hash(password, salt)
         await this.userModel.findByIdAndUpdate(existUser._id, { $set: { password: hashPassword } }, { new: true })
