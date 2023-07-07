@@ -38,7 +38,7 @@ export class MailService {
     };
     await this.otpModel.create({ email: email, otp: hashedOtp, expireAt: Date.now() + 3600000 });
     await SendGrid.send(emailData);
-    return 'success';
+    return "success"
   }
 
   async verifyOtp(email: string, otpVerification: string) {
@@ -59,6 +59,6 @@ export class MailService {
       );
 
     await this.otpModel.deleteMany({ email });
-    return 'success';
+    return "success";
   }
 }

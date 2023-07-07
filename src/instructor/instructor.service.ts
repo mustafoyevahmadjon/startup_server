@@ -10,7 +10,7 @@ export class InstructorService {
   constructor(
     @InjectModel(User.name) private userModel: Model<UserDocument>,
     @InjectModel(Instructor.name) private instructorModel: Model<InstructorDocument>,
-  ) {}
+  ) { }
   async applyAsInstructor(dto: InstructorApplyDto) {
     const { email, firstName, lastName, socialMedia } = dto;
     let user: UserDocument;
@@ -29,8 +29,8 @@ export class InstructorService {
     if (existInstructor)
       throw new BadRequestException('Instructor with that email already exist in our system');
 
-    const newInstructor = await this.instructorModel.create(data);
+    await this.instructorModel.create(data);
 
-    return newInstructor;
+    return "success";
   }
 }
