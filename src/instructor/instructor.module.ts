@@ -4,12 +4,14 @@ import { InstructorController } from './instructor.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Instructor, InstructorSchema } from './instructor.model';
 import { UserSchema, User } from 'src/user/user.model';
+import { Course, CourseSchema } from 'src/course/course.model';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
       { name: Instructor.name, schema: InstructorSchema },
+      { name: Course.name, schema: CourseSchema },
     ]),
   ],
   providers: [InstructorService],

@@ -9,6 +9,9 @@ export class Course {
   @Prop({ type: SchemaMS.Types.ObjectId, ref: 'User' })
   author: User;
 
+  @Prop({ unique: true, required: true })
+  slug: string
+
   @Prop()
   title: string;
 
@@ -35,6 +38,10 @@ export class Course {
 
   @Prop()
   price: number;
+
+  @Prop()
+  previewImage: string;
+
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course);

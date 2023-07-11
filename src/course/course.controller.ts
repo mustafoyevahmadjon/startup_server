@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CourseBodyDto } from './dto/course.dto';
 import { CourseService } from './course.service';
