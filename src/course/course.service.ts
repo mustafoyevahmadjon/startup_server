@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CourseBodyDto } from './dto/course.dto';
@@ -23,6 +23,11 @@ export class CourseService {
 
   async editCourse(dto: CourseBodyDto, courseId: string) {
     return await this.courseModel.findByIdAndUpdate(courseId, dto, { new: true });
+  }
+
+  async deleteCourse(courseId: string) {
+    await this.courseModel.findByIdAndRemove(courseId)
+    return "success"
   }
 
 }
