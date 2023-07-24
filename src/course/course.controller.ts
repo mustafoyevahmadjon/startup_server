@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Put } from '@nestjs/common';
 import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CourseBodyDto } from './dto/course.dto';
 import { CourseService } from './course.service';
@@ -28,5 +28,20 @@ export class CourseController {
   async deleteCourse(@Param('courseId') courseId: string) {
     return this.courseService.deleteCourse(courseId);
   }
+
+  @HttpCode(200)
+  @Put('activate/:courseId')
+  @Auth('INSTRUCTOR')
+  async activateCourse(@Param('courseId') courseId: string) {
+    return this.courseService.activateCourse(courseId);
+  }
+
+  @HttpCode(200)
+  @Put('draft/:courseId')
+  @Auth('INSTRUCTOR')
+  async draftCourse(@Param('courseId') courseId: string) {
+    return this.courseService.draftCourse(courseId);
+  }
+
 
 }

@@ -39,9 +39,11 @@ export class Course {
   @Prop()
   price: number;
 
-  @Prop()
-  previewImage: string;
+  @Prop({ type: Boolean, default: false })
+  isActive: boolean
 
+  @Prop()
+  image: string;
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course);
