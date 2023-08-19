@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Schema as SchemaMS } from 'mongoose';
+import { Section } from 'src/section/section.model';
 import { User } from 'src/user/user.model';
 
 export type CourseDocument = HydratedDocument<Course>;
@@ -9,14 +10,10 @@ export class Course {
   @Prop({ type: SchemaMS.Types.ObjectId, ref: 'User' })
   author: User;
 
+  @Prop([{ type: SchemaMS.Types.ObjectId, ref: 'Section' }])
+  sections: Section[];
+
   @Prop({ unique: true, required: true })
-  slug: string
-
-  @Prop()
-  title: string;
-
-  @Prop()
-  exerpt: string;
 
   @Prop([String])
   learn: string[];
@@ -28,7 +25,16 @@ export class Course {
   tags: string[];
 
   @Prop()
-  description: string;
+  price: number;
+
+  @Prop({ type: Boolean, default: false })
+  isActive: boolean
+
+  @Prop()
+  title: string;
+
+  @Prop()
+  slug: string
 
   @Prop()
   level: string;
@@ -37,13 +43,13 @@ export class Course {
   category: string;
 
   @Prop()
-  price: number;
-
-  @Prop({ type: Boolean, default: false })
-  isActive: boolean
+  image: string;
 
   @Prop()
-  image: string;
+  exerpt: string;
+
+  @Prop()
+  description: string;
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course);
