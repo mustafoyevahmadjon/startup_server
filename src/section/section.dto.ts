@@ -1,4 +1,4 @@
 export class SectionDto {
-  title: string
-  lessons?: string[]
+  title: string;
+  lessons?: string[];
 }

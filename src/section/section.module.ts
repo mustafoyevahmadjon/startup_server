@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
-import { SectionController } from './section.controller';
-import { SectionService } from './section.service';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
-import { Section, SectionSchema } from './section.model';
-import { Lessonschema } from 'src/lesson/lesson.model';
+import { MongooseModule } from '@nestjs/mongoose';
 import { Course, CourseSchema } from 'src/course/course.model';
+import { SectionController } from './section.controller';
+import { Section, SectionSchema } from './section.model';
+import { SectionService } from './section.service';
 
 @Module({
   imports: [
@@ -16,6 +15,6 @@ import { Course, CourseSchema } from 'src/course/course.model';
     ]),
   ],
   controllers: [SectionController],
-  providers: [SectionService]
+  providers: [SectionService],
 })
 export class SectionModule { }

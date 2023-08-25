@@ -5,7 +5,6 @@ import { Section } from 'src/section/section.model';
 import { LessonDto } from './lesson.dto';
 import { Lesson } from './lesson.model';
 
-
 @Injectable()
 export class LessonService {
   constructor(
@@ -27,40 +26,45 @@ export class LessonService {
   }
 
   async editLesson(body: LessonDto, lessonId: string) {
-    const lesson = await this.lessonModel.findByIdAndUpdate(lessonId, body, { new: true })
+    const lesson = await this.lessonModel.findByIdAndUpdate(lessonId, body, { new: true });
 
-    return lesson
+    return lesson;
   }
 
   async deleteLesson(sectionId: string, lessonId: string) {
-    await this.lessonModel.findByIdAndRemove(lessonId)
-    const section = this.sectionModel.findByIdAndUpdate(sectionId, { $pull: { lessons: lessonId } },
-      { new: true }
-    )
+    await this.lessonModel.findByIdAndRemove(lessonId);
+    const section = this.sectionModel.findByIdAndUpdate(
+      sectionId,
+      { $pull: { lessons: lessonId } },
+      { new: true },
+    );
 
-    return section
+    return section;
   }
 
   async getLesson(sectionId: string) {
-    const section = (await this.sectionModel.findById(sectionId)).populate("lessons")
+    const section = await this.sectionModel.findById(sectionId).populate('lessons');
 
-    return (await section).lessons
+    return section.lessons;
   }
 
   async completeLesson(userId: string, lessonId: string) {
-    const lesson = await this.lessonModel.findByIdAndUpdate(lessonId, { $push: { completed: userId } }, {
-      new: true
-    })
+    const lesson = await this.lessonModel.findByIdAndUpdate(
+      lessonId,
+      { $push: { completed: userId } },
+      { new: true },
+    );
 
-    return lesson
+    return lesson;
   }
 
   async uncompleteLesson(userId: string, lessonId: string) {
-    const lesson = await this.lessonModel.findByIdAndUpdate(lessonId, { $pull: { completed: userId } }, {
-      new: true
-    })
+    const lesson = await this.lessonModel.findByIdAndUpdate(
+      lessonId,
+      { $pull: { completed: userId } },
+      { new: true },
+    );
 
-    return lesson
+    return lesson;
   }
-
 }

@@ -52,4 +52,4 @@ export class SectionService {
 
     return course.sections;
   }
-} 
+}

@@ -6,12 +6,11 @@ export type SectionDocument = HydratedDocument<Section>;
 
 @Schema({ timestamps: true })
 export class Section {
-  @Prop() 
-  title: string
+  @Prop()
+  title: string;
 
   @Prop([{ type: SchemaMS.Types.ObjectId, ref: 'Lesson' }])
-  lessons: Lesson[]
-  
+  lessons: Lesson[];
 }
 
 export const SectionSchema = SchemaFactory.createForClass(Section);

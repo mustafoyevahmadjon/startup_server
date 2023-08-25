@@ -6,25 +6,25 @@ export type LessonDocument = HydratedDocument<Lesson>;
 @Schema({ timestamps: true })
 export class Lesson {
   @Prop()
-  name: string
-  
-  @Prop()
-  material: string
-  
-  @Prop()
-  course: string
-  
-  @Prop()
-  hour: number
+  name: string;
 
   @Prop()
-  minute: number
+  material: string;
 
   @Prop()
-  second: number
+  embedVideo: string;
+
+  @Prop()
+  hour: number;
+
+  @Prop()
+  minute: number;
+
+  @Prop()
+  second: number;
 
   @Prop([String])
-  completed: string[]
+  completed: string[];
 }
 
-export const Lessonschema = SchemaFactory.createForClass(Lesson);
+export const LessonSchema = SchemaFactory.createForClass(Lesson);
