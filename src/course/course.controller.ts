@@ -43,5 +43,14 @@ export class CourseController {
     return this.courseService.draftCourse(courseId);
   }
 
+  @HttpCode(200)
+  @Put('drag/:courseId')
+  @Auth('INSTRUCTOR')
+  async dragCourseSections(
+    @Param('courseId') courseId: string,
+    @Body() body: { sections: string[] },
+  ) {
+    return this.courseService.dragCourseSections(courseId, body.sections);
+  }
 
 }
