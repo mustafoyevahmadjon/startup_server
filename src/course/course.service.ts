@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CourseBodyDto } from './dto/course.dto';
@@ -18,7 +18,7 @@ export class CourseService {
         .replace(/^-+|-+$/g, '');
 
     const slug = slugify(dto.title);
-    return await this.courseModel.create({ ...dto, author: id, slug: slug });
+    return await this.courseModel.create({ ...dto, slug: slug, author: id });
   }
 
   async editCourse(dto: CourseBodyDto, courseId: string) {
@@ -26,22 +26,28 @@ export class CourseService {
   }
 
   async deleteCourse(courseId: string) {
-    await this.courseModel.findByIdAndRemove(courseId)
-    return "success"
+    await this.courseModel.findByIdAndRemove(courseId);
+    return 'success';
   }
 
   async activateCourse(courseId: string) {
-    const course = await this.courseModel.findByIdAndUpdate(courseId,
+    const course = await this.courseModel.findByIdAndUpdate(
+      courseId,
       { $set: { isActive: true } },
-      { new: true })
-    return course
+      { new: true },
+    );
+
+    return course;
   }
 
   async draftCourse(courseId: string) {
-    const course = await this.courseModel.findByIdAndUpdate(courseId,
+    const course = await this.courseModel.findByIdAndUpdate(
+      courseId,
       { $set: { isActive: false } },
-      { new: true })
-    return course
+      { new: true },
+    );
+
+    return course;
   }
 
   async dragCourseSections(courseId: string, sections: string[]) {
@@ -51,5 +57,4 @@ export class CourseService {
 
     return course.sections;
   }
-
 }

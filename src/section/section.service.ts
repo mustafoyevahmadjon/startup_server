@@ -14,15 +14,17 @@ export class SectionService {
 
   async createSection({ title }: SectionDto, courseId: string) {
     const section = await this.sectionModel.create({ title });
-    const course = await this.courseModel.findByIdAndUpdate(
-      courseId,
-      {
-        $push: { sections: section._id },
-      },
-      { new: true },
-    );
+    const course = await this.courseModel
+      .findByIdAndUpdate(
+        courseId,
+        {
+          $push: { sections: section._id },
+        },
+        { new: true },
+      )
+      .populate({ path: 'sections', populate: { path: 'lessons' } });
 
-    return course;
+    return course.sections;
   }
 
   async deleteSection(sectionId: string, courseId: string) {
@@ -34,9 +36,9 @@ export class SectionService {
         $pull: { sections: sectionId },
       },
       { new: true },
-    );
+    ).populate({ path: 'sections', populate: { path: 'lessons' } });
 
-    return course;
+    return course.sections;
   }
 
   async editSection(sectionId: string, { title, lessons }: SectionDto) {
@@ -44,7 +46,7 @@ export class SectionService {
       sectionId,
       { $set: { title, lessons } },
       { new: true },
-    );
+    ).populate("lessons");
   }
 
   async getSection(courseId: string) {
