@@ -50,6 +50,9 @@ export class Course {
 
   @Prop()
   description: string;
+
+  @Prop()
+  language: string;
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course);
